@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.springhibernate.bean.IDcard" table="idcard">
+		<cache usage="read-only"/>
+		<id name="idcardId" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="foreign"><!-- 外键生成 -->
+            	<param name="property">user</param>
+            </generator>
+        </id>
+        <property name="idcardCode" type="java.lang.String" length="18" lazy="true" not-null="true">
+            <column name="idcardCode"/>
+        </property>
+        <one-to-one name="user" class="com.springhibernate.bean.User" constrained="true"/><!-- 一对一映射 -->
+	</class>
+</hibernate-mapping>

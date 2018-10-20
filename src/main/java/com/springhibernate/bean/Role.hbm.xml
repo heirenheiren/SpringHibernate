@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.springhibernate.bean.Role" table="role">
+		<cache usage="read-only"/>
+		<id name="roleId" type="java.lang.Integer">
+			<column name="id"></column>
+			<generator class="native"></generator>
+		</id>
+		<property name="roleName" type="java.lang.String" lazy="true">
+            <column name="roleName" length="20" not-null="false" />
+        </property>
+        <set name="users" inverse="true"><!-- 定义一对多映射 -->
+        	<key column="roleId"></key>
+        	<one-to-many class="com.springhibernate.bean.User"/>
+        </set>
+	</class>
+</hibernate-mapping>
